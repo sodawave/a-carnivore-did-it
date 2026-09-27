@@ -4,7 +4,7 @@ import Link from "next/link";
 import { SiteHeader, DesktopHint } from "@/components/site-header";
 import { InvestigationTable } from "@/components/investigation/investigation-table";
 import { Button } from "@/components/ui/button";
-import { TUTORIAL_DOSSIER, TUTORIAL_STEPS, tutorialCase, byId } from "@/lib/game";
+import { TUTORIAL_DOSSIER, tutorialCase, byId } from "@/lib/game";
 
 export function TutorialView() {
   const game = tutorialCase();
@@ -19,21 +19,13 @@ export function TutorialView() {
         game={game}
         suspects={suspects}
         banner={
-          <ol className="grid shrink-0 grid-cols-4 gap-px border-b border-border/70 bg-secondary/50 text-[11px] leading-tight">
-            {TUTORIAL_STEPS.map((step, i) => (
-              <li key={step.title} className="bg-card/70 px-2.5 py-1.5">
-                <span className="font-medium text-foreground">
-                  {i + 1}. {step.title}.{" "}
-                </span>
-                <span className="text-muted-foreground">{step.body}</span>
-                {i === TUTORIAL_STEPS.length - 1 ? (
-                  <span className="mt-0.5 block text-[10px] text-muted-foreground">
-                    Sospechosos propios: el culpable es el Cisne.
-                  </span>
-                ) : null}
-              </li>
-            ))}
-          </ol>
+          <p className="shrink-0 border-b border-border/70 bg-secondary/50 px-4 py-1.5 text-sm leading-snug">
+            <span className="font-medium">Tutorial.</span>{" "}
+            <span className="text-muted-foreground">
+              3 sospechosos, 1 culpable, 1 mentira. Si el Cisne dijera la
+              verdad, Lince y Toro mentirían. El culpable es el Cisne.
+            </span>
+          </p>
         }
         resultActions={() => (
           <>

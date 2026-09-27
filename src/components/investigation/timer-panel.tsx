@@ -28,16 +28,16 @@ export function TimerPanel({
           : 0;
 
   return (
-    <div className="paper-card shrink-0 rounded-lg px-2 py-1.5">
+    <div className="paper-card shrink-0 rounded-xl px-3 py-2">
       <div className="flex items-start justify-between gap-2">
         <div>
-          <p className="text-[9px] uppercase tracking-[0.16em] text-muted-foreground">
+          <p className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
             Cronómetro
           </p>
-          <p className="font-heading text-xl leading-none tabular-nums tracking-tight">
+          <p className="font-heading text-2xl leading-none tabular-nums tracking-tight">
             {formatClock(elapsedSec)}
           </p>
-          <p className="mt-0.5 text-[10px] text-muted-foreground">
+          <p className="mt-0.5 text-xs text-muted-foreground">
             {frozen
               ? "Tiempo cerrado"
               : liveStars === 0
@@ -50,7 +50,7 @@ export function TimerPanel({
       <Progress value={Math.min(100, (elapsedSec / max) * 100)} className="mt-1 gap-0">
         <span className="sr-only">Avance del cronómetro</span>
       </Progress>
-      <div className="mt-1 flex justify-between text-[10px] text-muted-foreground">
+      <div className="mt-1 flex justify-between text-xs text-muted-foreground">
         <span>3★ {formatClock(t3)}</span>
         <span>2★ {formatClock(t2)}</span>
         <span>1★ {formatClock(t1)}</span>

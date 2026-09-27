@@ -269,7 +269,7 @@ export function CampaignPlay() {
         game={built.game}
         suspects={suspectsForCount(dossier.suspectCount)}
         banner={
-          <p className="shrink-0 bg-secondary/60 px-3 py-0.5 text-center text-[11px] leading-tight">
+          <p className="shrink-0 bg-secondary/60 px-3 py-1 text-center text-xs leading-snug">
             Campaña · dosier {String(playingId).padStart(2, "0")} de 08 ·
             insignias {progress.campaign.badgesLeft}/2
           </p>
