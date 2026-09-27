@@ -30,7 +30,7 @@ export function ResultPanel({
 
   return (
     <div className="paper-card rounded-2xl p-5">
-      <p className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
+      <p className="text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
         Veredicto
       </p>
       <h2 className="font-heading text-3xl">
@@ -68,7 +68,7 @@ export function ResultPanel({
                 {liars.includes(s.id) ? "Mentía" : "Decía la verdad"}
               </span>
               {accusedSet.has(s.id) && (
-                <span className="text-xs uppercase tracking-wider text-amber-800">
+                <span className="text-[10px] uppercase tracking-wider text-amber-800">
                   Lo señalaste
                 </span>
               )}

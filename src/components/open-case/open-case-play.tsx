@@ -83,7 +83,7 @@ export function OpenCasePlay({
 
 function Shell({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex h-dvh flex-col overflow-hidden">
+    <div className="flex min-h-full flex-1 flex-col">
       <SiteHeader compact />
       <DesktopHint />
       {children}

@@ -109,8 +109,7 @@
         transparent 19px,
         oklch(0.4 0.03 50 / 0.03) 20px
       );
-    min-height: 0;
-    height: 100%;
+    min-height: 100%;
   }
   h1,
   h2,

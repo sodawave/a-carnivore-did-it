@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { AccusationDialog } from "@/components/investigation/accusation-dialog";
 import { NotebookPanel } from "@/components/investigation/notebook";
 import { ResultPanel } from "@/components/investigation/result-panel";
@@ -57,6 +57,11 @@ export function InvestigationTable({
   const running = result === null;
   const elapsed = useElapsed(running, game.id);
 
+  const statementsBySpeaker = useMemo(
+    () => new Map(game.statements.map((st) => [st.speakerId, st])),
+    [game.statements],
+  );
+
   function patchNote(id: string, patch: Partial<SuspectNotes>) {
     setNotes((prev) => ({
       ...prev,
@@ -76,50 +81,60 @@ export function InvestigationTable({
 
   if (result) {
     return (
-      <div className="min-h-0 flex-1 overflow-y-auto">
-        <div className="mx-auto w-full max-w-3xl p-5">
-          <ResultPanel
-            correct={result.correct}
-            stars={result.stars}
-            elapsedLabel={formatClock(result.elapsedSec)}
-            suspects={suspects}
-            solution={game.solution}
-            accused={result.accused}
-          >
-            {resultActions?.(result)}
-          </ResultPanel>
-        </div>
+      <div className="mx-auto w-full max-w-3xl p-6">
+        <ResultPanel
+          correct={result.correct}
+          stars={result.stars}
+          elapsedLabel={formatClock(result.elapsedSec)}
+          suspects={suspects}
+          solution={game.solution}
+          accused={result.accused}
+        >
+          {resultActions?.(result)}
+        </ResultPanel>
       </div>
     );
   }
 
   return (
-    <div className="flex min-h-0 flex-1 flex-col overflow-hidden">
+    <div className="flex min-h-0 flex-1 flex-col">
       {banner}
-      <div className="grid min-h-0 flex-1 overflow-hidden lg:grid-cols-[minmax(0,1fr)_300px] xl:grid-cols-[minmax(0,1fr)_320px]">
-        <section className="flex min-h-0 flex-col gap-2 overflow-hidden p-2.5 lg:p-3">
-          <div className="flex shrink-0 flex-wrap items-baseline gap-x-2.5 gap-y-0">
-            <Badge variant="outline" className="h-5 text-xs">
-              Dosier {String(dossier.id).padStart(2, "0")}
-            </Badge>
-            <h1 className="font-heading text-lg leading-none">
-              {dossier.title}
-            </h1>
-            <span className="text-xs text-muted-foreground">
+      <div className="grid min-h-0 flex-1 xl:grid-cols-[1fr_380px]">
+        <section className="flex min-h-0 flex-col p-4 xl:p-6">
+          <div className="mb-3 flex flex-wrap items-center gap-2">
+            <Badge variant="outline">Dosier {String(dossier.id).padStart(2, "0")}</Badge>
+            <h1 className="font-heading text-2xl">{dossier.title}</h1>
+            <span className="text-sm text-muted-foreground">
               {dossier.suspectCount} sospechosos · {dossier.culpritCount}{" "}
               {dossier.culpritCount === 1 ? "culpable" : "culpables"} ·{" "}
               {honestyLabel(dossier)}
             </span>
           </div>
-          <div className="relative min-h-0 flex-1 overflow-hidden rounded-xl bg-secondary/40 [container-type:size]">
+          <div className="flex min-h-[720px] flex-1 items-center justify-center overflow-visible rounded-[2rem] bg-secondary/40 px-6 py-24">
             <SuspectCircle
               suspects={suspects}
               statements={game.statements}
               notes={notes}
             />
           </div>
+          <ol className="mt-4 grid gap-2 md:grid-cols-2">
+            {suspects.map((s, i) => {
+              const stmt = statementsBySpeaker.get(s.id);
+              return (
+                <li
+                  key={s.id}
+                  className="rounded-xl border border-border/70 bg-card/80 px-3 py-2 text-sm"
+                >
+                  <span className="text-xs text-muted-foreground">
+                    {i + 1}. {s.name}
+                  </span>
+                  <p className="leading-snug">«{stmt?.text}»</p>
+                </li>
+              );
+            })}
+          </ol>
         </section>
-        <aside className="flex min-h-0 flex-col gap-2 overflow-hidden border-t border-border/70 bg-card/50 p-2.5 lg:border-t-0 lg:border-l lg:p-3">
+        <aside className="flex min-h-0 flex-col gap-3 border-t border-border/70 bg-card/50 p-4 xl:border-t-0 xl:border-l">
           {hint}
           <TimerPanel elapsedSec={elapsed} dossier={dossier} />
           <NotebookPanel
@@ -128,7 +143,7 @@ export function InvestigationTable({
             notes={notes}
             onChange={patchNote}
           />
-          <Button className="h-9 w-full shrink-0 text-sm" onClick={() => setAccuseOpen(true)}>
+          <Button size="lg" className="w-full" onClick={() => setAccuseOpen(true)}>
             Acusar
           </Button>
         </aside>
