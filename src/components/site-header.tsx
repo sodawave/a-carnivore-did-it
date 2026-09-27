@@ -17,23 +17,23 @@ export function SiteHeader({ compact = false }: { compact?: boolean }) {
   const pathname = usePathname();
 
   return (
-    <header className="flex items-center justify-between gap-4 border-b border-border/70 bg-card/70 px-5 py-3 backdrop-blur-sm">
-      <Link href="/" className="flex items-center gap-2.5">
-        <span className="flex size-9 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-sm">
-          <PawPrint className="size-4" />
+    <header className="flex shrink-0 items-center justify-between gap-3 border-b border-border/70 bg-card/70 px-3 py-1 backdrop-blur-sm">
+      <Link href="/" className="flex items-center gap-2">
+        <span className="flex size-6 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-sm">
+          <PawPrint className="size-3.5" />
         </span>
         <span className="leading-tight">
-          <span className="font-heading block text-lg tracking-tight">
+          <span className="font-heading block text-sm tracking-tight">
             Ha sido un carnívoro
           </span>
           {!compact && (
-            <span className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+            <span className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
               Expediente de patio
             </span>
           )}
         </span>
       </Link>
-      <nav className="flex items-center gap-1">
+      <nav className="flex items-center gap-0.5">
         {NAV.map((item) => {
           const active =
             item.href === "/"
@@ -44,7 +44,7 @@ export function SiteHeader({ compact = false }: { compact?: boolean }) {
               key={item.href}
               href={item.href}
               className={cn(
-                "rounded-full px-3 py-1.5 text-sm transition-colors",
+                "rounded-full px-2 py-0.5 text-[13px] transition-colors",
                 active
                   ? "bg-primary text-primary-foreground"
                   : "text-foreground/80 hover:bg-secondary",
@@ -65,7 +65,7 @@ export function SiteHeader({ compact = false }: { compact?: boolean }) {
 
 export function DesktopHint() {
   return (
-    <p className="bg-primary/10 px-4 py-2 text-center text-xs text-primary xl:hidden">
+    <p className="shrink-0 bg-primary/10 px-4 py-1.5 text-center text-[11px] text-primary lg:hidden">
       La mesa de investigación está pensada para escritorio. En pantallas
       estrechas el corro se apila bajo el cuaderno.
     </p>

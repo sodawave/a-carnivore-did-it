@@ -81,51 +81,63 @@ export function InvestigationTable({
 
   if (result) {
     return (
-      <div className="mx-auto w-full max-w-3xl p-6">
-        <ResultPanel
-          correct={result.correct}
-          stars={result.stars}
-          elapsedLabel={formatClock(result.elapsedSec)}
-          suspects={suspects}
-          solution={game.solution}
-          accused={result.accused}
-        >
-          {resultActions?.(result)}
-        </ResultPanel>
+      <div className="min-h-0 flex-1 overflow-y-auto">
+        <div className="mx-auto w-full max-w-3xl p-5">
+          <ResultPanel
+            correct={result.correct}
+            stars={result.stars}
+            elapsedLabel={formatClock(result.elapsedSec)}
+            suspects={suspects}
+            solution={game.solution}
+            accused={result.accused}
+          >
+            {resultActions?.(result)}
+          </ResultPanel>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="flex min-h-0 flex-1 flex-col">
+    <div className="flex min-h-0 flex-1 flex-col overflow-hidden">
       {banner}
-      <div className="grid min-h-0 flex-1 xl:grid-cols-[1fr_380px]">
-        <section className="flex min-h-0 flex-col p-4 xl:p-6">
-          <div className="mb-3 flex flex-wrap items-center gap-2">
-            <Badge variant="outline">Dosier {String(dossier.id).padStart(2, "0")}</Badge>
-            <h1 className="font-heading text-2xl">{dossier.title}</h1>
-            <span className="text-sm text-muted-foreground">
+      <div className="grid min-h-0 flex-1 overflow-hidden lg:grid-cols-[minmax(0,1fr)_260px] xl:grid-cols-[minmax(0,1fr)_280px]">
+        <section className="flex min-h-0 flex-col gap-1.5 overflow-hidden p-2 lg:p-2.5">
+          <div className="flex shrink-0 flex-wrap items-baseline gap-x-2 gap-y-0">
+            <Badge variant="outline" className="h-4 text-[10px]">
+              Dosier {String(dossier.id).padStart(2, "0")}
+            </Badge>
+            <h1 className="font-heading text-base leading-none lg:text-lg">
+              {dossier.title}
+            </h1>
+            <span className="text-[11px] text-muted-foreground">
               {dossier.suspectCount} sospechosos · {dossier.culpritCount}{" "}
               {dossier.culpritCount === 1 ? "culpable" : "culpables"} ·{" "}
               {honestyLabel(dossier)}
             </span>
           </div>
-          <div className="flex min-h-[720px] flex-1 items-center justify-center overflow-visible rounded-[2rem] bg-secondary/40 px-6 py-24">
+          <div className="relative min-h-0 flex-1 overflow-hidden rounded-xl bg-secondary/40 [container-type:size]">
             <SuspectCircle
               suspects={suspects}
               statements={game.statements}
               notes={notes}
             />
           </div>
-          <ol className="mt-4 grid gap-2 md:grid-cols-2">
+          <ol
+            className={
+              suspects.length <= 3
+                ? "grid shrink-0 grid-cols-3 gap-1"
+                : "grid shrink-0 gap-1 sm:grid-cols-2"
+            }
+          >
             {suspects.map((s, i) => {
               const stmt = statementsBySpeaker.get(s.id);
               return (
                 <li
                   key={s.id}
-                  className="rounded-xl border border-border/70 bg-card/80 px-3 py-2 text-sm"
+                  className="rounded-md border border-border/70 bg-card/80 px-1.5 py-0.5 text-[11px] leading-snug"
                 >
-                  <span className="text-xs text-muted-foreground">
+                  <span className="text-[10px] text-muted-foreground">
                     {i + 1}. {s.name}
                   </span>
                   <p className="leading-snug">«{stmt?.text}»</p>
@@ -134,7 +146,7 @@ export function InvestigationTable({
             })}
           </ol>
         </section>
-        <aside className="flex min-h-0 flex-col gap-3 border-t border-border/70 bg-card/50 p-4 xl:border-t-0 xl:border-l">
+        <aside className="flex min-h-0 flex-col gap-1.5 overflow-hidden border-t border-border/70 bg-card/50 p-2 lg:border-t-0 lg:border-l lg:p-2.5">
           {hint}
           <TimerPanel elapsedSec={elapsed} dossier={dossier} />
           <NotebookPanel
@@ -143,7 +155,7 @@ export function InvestigationTable({
             notes={notes}
             onChange={patchNote}
           />
-          <Button size="lg" className="w-full" onClick={() => setAccuseOpen(true)}>
+          <Button className="h-7 w-full shrink-0 text-sm" onClick={() => setAccuseOpen(true)}>
             Acusar
           </Button>
         </aside>

@@ -260,7 +260,7 @@ export function CampaignPlay() {
   const campaignDone = progress.campaign.status === "completed";
 
   return (
-    <div className="flex min-h-full flex-1 flex-col">
+    <div className="flex h-dvh flex-col overflow-hidden">
       <SiteHeader compact />
       <DesktopHint />
       <InvestigationTable
@@ -269,7 +269,7 @@ export function CampaignPlay() {
         game={built.game}
         suspects={suspectsForCount(dossier.suspectCount)}
         banner={
-          <p className="bg-secondary/60 px-4 py-2 text-center text-xs">
+          <p className="shrink-0 bg-secondary/60 px-3 py-0.5 text-center text-[11px] leading-tight">
             Campaña · dosier {String(playingId).padStart(2, "0")} de 08 ·
             insignias {progress.campaign.badgesLeft}/2
           </p>
