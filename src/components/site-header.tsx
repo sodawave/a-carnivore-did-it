@@ -54,14 +54,9 @@ export function SiteHeader({ compact = false }: { compact?: boolean }) {
             </Link>
           );
         })}
-        <RulesDialog>
-          <button
-            type="button"
-            className="ml-1 inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm text-foreground/80 hover:bg-secondary"
-          >
-            <BookOpen className="size-3.5" />
-            Reglas
-          </button>
+        <RulesDialog className="ml-1">
+          <BookOpen className="size-3.5" />
+          Reglas
         </RulesDialog>
       </nav>
     </header>

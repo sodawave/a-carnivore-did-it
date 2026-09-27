@@ -22,7 +22,7 @@ export function SuspectCircle({
 }) {
   const n = suspects.length;
   return (
-    <div className="relative mx-auto aspect-square w-full max-w-[640px]">
+    <div className="relative mx-auto aspect-square w-full max-w-[560px]">
       <div className="blotter absolute inset-[18%] rounded-full" />
       <div className="absolute inset-[28%] flex items-center justify-center">
         <div className="text-center">
@@ -36,7 +36,7 @@ export function SuspectCircle({
       </div>
       {suspects.map((suspect, i) => {
         const angle = (i / n) * Math.PI * 2 - Math.PI / 2;
-        const r = 38;
+        const r = n >= 6 ? 34 : 32;
         const left = 50 + Math.cos(angle) * r;
         const top = 50 + Math.sin(angle) * r;
         const stmt = statements.find((s) => s.speakerId === suspect.id);

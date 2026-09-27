@@ -54,39 +54,69 @@ export type SavedProgress = {
   campaign: CampaignProgress;
 };
 
-const emptyCampaign = (): CampaignProgress => ({
+const EMPTY_CAMPAIGN: CampaignProgress = {
   status: "idle",
   nextIndex: 0,
   badgesLeft: 2,
   badgesUsed: 0,
   results: [],
-});
+};
 
-export const emptyProgress = (): SavedProgress => ({
+const EMPTY_PROGRESS: SavedProgress = {
   openBest: {},
-  campaign: emptyCampaign(),
-});
+  campaign: EMPTY_CAMPAIGN,
+};
+
+export function emptyProgress(): SavedProgress {
+  return EMPTY_PROGRESS;
+}
+
+function copyProgress(progress: SavedProgress): SavedProgress {
+  return {
+    openBest: { ...progress.openBest },
+    campaign: {
+      ...progress.campaign,
+      results: [...progress.campaign.results],
+    },
+  };
+}
+
+function parseProgress(raw: string | null): SavedProgress {
+  if (!raw) return EMPTY_PROGRESS;
+  try {
+    const parsed = JSON.parse(raw) as SavedProgress;
+    if (!parsed.campaign || !parsed.openBest) return EMPTY_PROGRESS;
+    return parsed;
+  } catch {
+    return EMPTY_PROGRESS;
+  }
+}
+
+let cachedRaw: string | null = null;
+let cachedProgress: SavedProgress = EMPTY_PROGRESS;
+let hasClientSnapshot = false;
 
 function canUseStorage(): boolean {
   return typeof window !== "undefined" && typeof localStorage !== "undefined";
 }
 
 export function loadProgress(): SavedProgress {
-  if (!canUseStorage()) return emptyProgress();
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return emptyProgress();
-    const parsed = JSON.parse(raw) as SavedProgress;
-    if (!parsed.campaign || !parsed.openBest) return emptyProgress();
-    return parsed;
-  } catch {
-    return emptyProgress();
-  }
+  if (!canUseStorage()) return EMPTY_PROGRESS;
+  const raw = localStorage.getItem(STORAGE_KEY);
+  if (hasClientSnapshot && raw === cachedRaw) return cachedProgress;
+  hasClientSnapshot = true;
+  cachedRaw = raw;
+  cachedProgress = parseProgress(raw);
+  return cachedProgress;
 }
 
 export function saveProgress(progress: SavedProgress): void {
   if (!canUseStorage()) return;
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+  const raw = JSON.stringify(progress);
+  localStorage.setItem(STORAGE_KEY, raw);
+  cachedRaw = raw;
+  cachedProgress = progress;
+  hasClientSnapshot = true;
   emit();
 }
 
@@ -104,7 +134,7 @@ export function recordOpenBest(
   stars: number,
   elapsedSec: number,
 ): SavedProgress {
-  const progress = loadProgress();
+  const progress = copyProgress(loadProgress());
   const key = openCaseKey(dossierId, caseId);
   const prev = progress.openBest[key];
   if (!prev || stars > prev.stars || (stars === prev.stars && elapsedSec < prev.elapsedSec)) {
@@ -115,7 +145,7 @@ export function recordOpenBest(
 }
 
 export function startCampaign(): SavedProgress {
-  const progress = loadProgress();
+  const progress = copyProgress(loadProgress());
   progress.campaign = {
     status: "in_progress",
     nextIndex: 0,
@@ -133,7 +163,7 @@ export function recordCampaignCase(
   elapsedSec: number,
   skipped: boolean,
 ): SavedProgress {
-  const progress = loadProgress();
+  const progress = copyProgress(loadProgress());
   const campaign = progress.campaign;
   campaign.results = [
     ...campaign.results.filter((r) => r.dossierId !== dossierId),
@@ -154,24 +184,30 @@ export function recordCampaignCase(
 }
 
 export function spendBadgeAndSkip(dossierId: number): SavedProgress {
-  const progress = loadProgress();
-  const campaign = progress.campaign;
-  if (campaign.badgesLeft <= 0) return progress;
-  campaign.badgesLeft -= 1;
-  campaign.badgesUsed += 1;
+  const progress = copyProgress(loadProgress());
+  if (progress.campaign.badgesLeft <= 0) return progress;
+  progress.campaign.badgesLeft -= 1;
+  progress.campaign.badgesUsed += 1;
+  saveProgress(progress);
   return recordCampaignCase(dossierId, 0, 0, true);
 }
 
 export function failCampaign(): SavedProgress {
-  const progress = loadProgress();
+  const progress = copyProgress(loadProgress());
   progress.campaign.status = "failed";
   saveProgress(progress);
   return progress;
 }
 
 export function resetCampaign(): SavedProgress {
-  const progress = loadProgress();
-  progress.campaign = emptyCampaign();
+  const progress = copyProgress(loadProgress());
+  progress.campaign = {
+    status: "idle",
+    nextIndex: 0,
+    badgesLeft: 2,
+    badgesUsed: 0,
+    results: [],
+  };
   saveProgress(progress);
   return progress;
 }

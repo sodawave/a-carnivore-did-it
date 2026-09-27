@@ -12,10 +12,18 @@ import {
 } from "@/components/ui/dialog";
 import type { ReactNode } from "react";
 
-export function RulesDialog({ children }: { children: ReactNode }) {
+export function RulesDialog({
+  children,
+  className,
+  size = "default",
+}: {
+  children: ReactNode;
+  className?: string;
+  size?: "default" | "lg";
+}) {
   return (
     <Dialog>
-      <DialogTrigger render={<span className="inline-flex" />}>
+      <DialogTrigger render={<Button variant="ghost" size={size} className={className} />}>
         {children}
       </DialogTrigger>
       <DialogContent className="max-h-[80vh] overflow-y-auto sm:max-w-lg">
@@ -56,9 +64,7 @@ export function RulesDialog({ children }: { children: ReactNode }) {
             Sospechosos, frases, arte y marca son propios de este expediente.
           </p>
         </div>
-        <DialogClose
-          render={<Button className="mt-2 w-full" />}
-        >
+        <DialogClose render={<Button className="mt-2 w-full" />}>
           Entendido
         </DialogClose>
       </DialogContent>

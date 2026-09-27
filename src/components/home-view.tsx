@@ -45,11 +45,7 @@ export function HomeView() {
               >
                 Campaña
               </Button>
-              <RulesDialog>
-                <Button variant="ghost" size="lg">
-                  Cómo se investiga
-                </Button>
-              </RulesDialog>
+              <RulesDialog size="lg">Cómo se investiga</RulesDialog>
             </div>
           </div>
           <div className="relative mx-auto aspect-square w-full max-w-md">

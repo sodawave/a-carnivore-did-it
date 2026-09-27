@@ -110,7 +110,7 @@ export function InvestigationTable({
               {honestyLabel(dossier)}
             </span>
           </div>
-          <div className="flex min-h-[640px] flex-1 items-center justify-center overflow-visible rounded-[2rem] bg-secondary/40 p-4">
+          <div className="flex min-h-[720px] flex-1 items-center justify-center overflow-visible rounded-[2rem] bg-secondary/40 px-6 py-24">
             <SuspectCircle
               suspects={suspects}
               statements={game.statements}
