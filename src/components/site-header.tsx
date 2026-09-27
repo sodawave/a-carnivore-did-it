@@ -67,7 +67,7 @@ export function DesktopHint() {
   return (
     <p className="shrink-0 bg-primary/10 px-4 py-1.5 text-center text-[11px] text-primary lg:hidden">
       La mesa de investigación está pensada para escritorio. En pantallas
-      estrechas el corro se apila bajo el cuaderno.
+      estrechas la ronda se apila bajo el cuaderno.
     </p>
   );
 }

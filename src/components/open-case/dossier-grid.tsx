@@ -31,7 +31,7 @@ export function DossierGrid() {
         </p>
         <h1 className="font-heading text-4xl">Elige un dosier</h1>
         <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-          Cada dosier fija el corro, los culpables y las mentiras. Luego eliges
+          Cada dosier fija la ronda, los culpables y las mentiras. Luego eliges
           uno de {OPEN_CASE_COUNT} expedientes. El motor solo sirve puzzles con
           una solución.
         </p>

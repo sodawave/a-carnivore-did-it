@@ -16,7 +16,7 @@ const display = Fraunces({
 export const metadata: Metadata = {
   title: "Ha sido un carnívoro",
   description:
-    "Juego de deducción lógica: un corro de sospechosos, frases que pueden ser mentira y una sola solución. Encuentra al culpable.",
+    "Juego de deducción lógica: una ronda de sospechosos, frases que pueden ser mentira y una sola solución. Encuentra al culpable.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

@@ -34,7 +34,7 @@ export function ResultPanel({
         Veredicto
       </p>
       <h2 className="font-heading text-3xl">
-        {correct ? "El corro encaja" : "No era esa lectura"}
+        {correct ? "La ronda encaja" : "No era esa lectura"}
       </h2>
       <div className="mt-2 flex items-center gap-3">
         <StarRow count={stars} />

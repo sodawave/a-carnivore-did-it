@@ -31,7 +31,7 @@ export function SuspectCircle({
         <div className="absolute inset-[30%] flex items-center justify-center">
           <div className="text-center">
             <p className="font-heading text-sm leading-none text-primary-foreground/90 drop-shadow lg:text-base">
-              El corro
+              La ronda
             </p>
             <p className="mt-0.5 text-[10px] text-primary-foreground/70">
               {n} sospechosos

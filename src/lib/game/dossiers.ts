@@ -4,7 +4,7 @@ export const DOSSIERS: Dossier[] = [
   {
     id: 1,
     title: "Tres en el patio",
-    blurb: "Un corro corto. Una sola mentira. El primer expediente de cualquier detective.",
+    blurb: "Una ronda corta. Una sola mentira. El primer expediente de cualquier detective.",
     suspectCount: 3,
     culpritCount: 1,
     honesty: "lies",
@@ -25,7 +25,7 @@ export const DOSSIERS: Dossier[] = [
   },
   {
     id: 3,
-    title: "Cuatro en corro",
+    title: "Cuatro en ronda",
     blurb: "Entra un cuarto sospechoso. Una mentira, un culpable.",
     suspectCount: 4,
     culpritCount: 1,
@@ -48,7 +48,7 @@ export const DOSSIERS: Dossier[] = [
   {
     id: 5,
     title: "Cinco sombras",
-    blurb: "El corro se ensancha. Dos mentiras cruzan el patio.",
+    blurb: "La ronda se ensancha. Dos mentiras cruzan el patio.",
     suspectCount: 5,
     culpritCount: 1,
     honesty: "lies",
@@ -69,7 +69,7 @@ export const DOSSIERS: Dossier[] = [
   },
   {
     id: 7,
-    title: "El corro ancho",
+    title: "La ronda ancha",
     blurb: "Seis en círculo. Tres mentiras. Hay que mirar a los vecinos.",
     suspectCount: 6,
     culpritCount: 1,
@@ -114,7 +114,7 @@ export const DOSSIERS: Dossier[] = [
   {
     id: 11,
     title: "La manada",
-    blurb: "Seis en corro y dos culpables. Mentiras en rango.",
+    blurb: "Seis en ronda y dos culpables. Mentiras en rango.",
     suspectCount: 6,
     culpritCount: 2,
     honesty: "lies",

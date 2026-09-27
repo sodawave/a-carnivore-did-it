@@ -21,7 +21,7 @@ export function HomeView() {
               Ha sido un carnívoro
             </h1>
             <p className="mt-5 max-w-xl text-base leading-relaxed text-foreground/85">
-              Siete animales en corro. Cada uno suelta una frase. Algunas son
+              Siete animales en ronda. Cada uno suelta una frase. Algunas son
               mentira. El dosier te dice cuántos mintieron y cuántos lo
               hicieron. Solo hay una lectura que encaja — y el reloj cuenta.
             </p>

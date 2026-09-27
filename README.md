@@ -1,6 +1,6 @@
 # Ha sido un carnívoro
 
-Juego de deducción lógica para escritorio. Un corro de animales habla; algunas frases son mentira; el dosier fija cuántos mintieron y cuántos lo hicieron. Cada expediente tiene **una sola solución**.
+Juego de deducción lógica para escritorio. Una ronda de animales habla; algunas frases son mentira; el dosier fija cuántos mintieron y cuántos lo hicieron. Cada expediente tiene **una sola solución**.
 
 Inspirado en las reglas y el tipo de puzzle de *A Carnivore Did It!* (Horrible Guild). Sospechosos, frases, casos, arte y marca son originales. No es un producto oficial.
 

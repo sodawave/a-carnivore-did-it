@@ -2,7 +2,7 @@ import type { Assignment, Predicate, Statement, Suspect } from "./types";
 
 export function indexOf(suspects: Suspect[], id: string): number {
   const i = suspects.findIndex((s) => s.id === id);
-  if (i < 0) throw new Error(`No está en el corro: ${id}`);
+  if (i < 0) throw new Error(`No está en la ronda: ${id}`);
   return i;
 }
 

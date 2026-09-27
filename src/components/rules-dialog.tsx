@@ -36,12 +36,12 @@ export function RulesDialog({
         </DialogHeader>
         <div className="space-y-3 text-sm leading-relaxed text-foreground/90">
           <p>
-            Los sospechosos se sientan en corro. Cada uno tiene nombre, altura y
+            Los sospechosos se sientan en ronda. Cada uno tiene nombre, altura y
             dieta (carnívoro o herbívoro) y suelta una frase. Esa frase puede ser
             verdad o mentira.
           </p>
           <p>
-            El dosier fija cuántos hay en el corro, cuántos son culpables y
+            El dosier fija cuántos hay en la ronda, cuántos son culpables y
             cuántas frases son mentira (o verdad). Culpa y honestidad no se
             excluyen: el culpable puede mentir o decir la verdad.
           </p>
@@ -55,7 +55,7 @@ export function RulesDialog({
           <p>
             Cada expediente tiene <strong>una sola solución</strong>. El motor no
             sirve casos irresolubles ni con varias lecturas. Marca hipótesis en
-            el cuaderno —el de mesa no traía uno— y acusa cuando el corro te
+            el cuaderno —el de mesa no traía uno— y acusa cuando la ronda te
             cuadre. El cronómetro reparte 3, 2 o 1 estrella; fuera de tiempo o
             con el culpable equivocado no hay estrellas.
           </p>
