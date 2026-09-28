@@ -25,6 +25,8 @@ CLAUDE.md
 # misc
 .DS_Store
 *.pem
+*.ts.net.crt
+*.ts.net.key
 
 # debug
 npm-debug.log*
